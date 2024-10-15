@@ -52,7 +52,7 @@ class Banco
     }
 
     // Função para executar uma query SQL e retornar o resultado
-    public static function query($sql){
+    public function query($sql){
         // Inicializa o Logger
         if (self::$logger === null) {
             self::$logger = new Logger();
