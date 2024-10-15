@@ -70,9 +70,12 @@ class Banco
             $stmt = $conn->prepare($sql);
             // Executar a query
             $stmt ->execute();
+
+            // Log da execução da query
+            self::$logger->info('Query executada: ' . $sql);
+
             // Retornar todos os resultados
             return $stmt->fetchAll(PDO::FETCH_ASSOC);
-            self::$logger->info('Query executada' . $stmt);
         } catch (PDOException $exception) {
             // Em caso de erro, retornar a mensagem
             self::$logger->error('Erro ao executar a query: ' . $exception->getMessage());
