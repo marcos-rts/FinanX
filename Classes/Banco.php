@@ -60,18 +60,18 @@ class Banco
 
         try{
             // Conectar ao banco de dados
-            $conn self::conectar();
+            $conn = Banco::conectar();
             // Preparar a query
             $stmt = $conn->prepare($sql);
             // Executar a query
             $stmt ->execute();
             // Retornar todos os resultados
-            return $stmt->fetchAll(PDO::FETCH_ASSOC);s
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
             self::$logger->info('Query executada' . $stmt);
         } catch (PDOException $exception) {
             // Em caso de erro, retornar a mensagem
             self::$logger->error('Erro ao executar a query: ' . $exception->getMessage());
-            die($exception->getMessage())
+            die($exception->getMessage());
         }
     }
 }
