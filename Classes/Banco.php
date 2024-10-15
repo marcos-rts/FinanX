@@ -1,5 +1,5 @@
 <?php
-include './log/log.php';
+include '../log/log.php';
 // Definição classe Banco
 class Banco
 {
