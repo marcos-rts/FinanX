@@ -54,21 +54,21 @@ class Banco
         self::$cont = null;
     }
 
-    // // Função para executar uma query SQL e retornar o resultado
-    // public static function query($sql){
-    //     try{
-    //         // Conectar ao banco de dados
-    //         $conn self::conectar();
-    //         // Preparar a query
-    //         $stmt = $conn->prepare($sql);
-    //         // Executar a query
-    //         $stmt ->execute();
-    //         // Retornar todos os resultados
-    //         return $stmt->fetchAll(PDO::FETCH_ASSOC);
-    //     } catch (PDOException $exception) {
-    //         // Em caso de erro, retornar a mensagem
-    //         die($exception->getMessage())
-    //     }
-    // }
+    // Função para executar uma query SQL e retornar o resultado
+    public static function query($sql){
+        try{
+            // Conectar ao banco de dados
+            $conn self::conectar();
+            // Preparar a query
+            $stmt = $conn->prepare($sql);
+            // Executar a query
+            $stmt ->execute();
+            // Retornar todos os resultados
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $exception) {
+            // Em caso de erro, retornar a mensagem
+            die($exception->getMessage())
+        }
+    }
 }
 ?>
