@@ -13,9 +13,14 @@ class Banco
     private static $logger; // Criação de uma instância do Logger como estática
 
     // Construtor privado para evitar a instância da classe diretamente
-    private function __construct()
+    public function __construct()
     {
-        die('A função não é permitido');
+        if (self::$logger === null) {
+            self::$logger = new Logger();
+        }
+        // Construtor agora é público, permitindo a criação de instâncias
+        self::$logger->info('Instancia criada');
+
     }
 
     // Método estático para conectar ao banco de dados
