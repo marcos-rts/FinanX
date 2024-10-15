@@ -8,12 +8,9 @@ class Banco
     private static $DB_port = '3306'; // Porta personalizada
     private static $DB_usuario = 'root'; // Nome de usuário
     private static $DB_senha = ''; // Senha do usuário
-
-    // Variável estática privada para armazenar a conexão com o banco de dados
-    private static $cont = null;
-
-        // Criação de uma instância do Logger como estática
-        private static $logger;
+    // -----------------------------------------------------------------------------------
+    private static $cont = null; // Variável estática privada para armazenar a conexão com o banco de dados
+    private static $logger; // Criação de uma instância do Logger como estática
 
     // Construtor privado para evitar a instância da classe diretamente
     private function __construct()
@@ -24,10 +21,10 @@ class Banco
     // Método estático para conectar ao banco de dados
     public static function conectar()
     {
-                // Inicializa o Logger
-                if (self::$logger === null) {
-                    self::$logger = new Logger();
-                }
+        // Inicializa o Logger
+        if (self::$logger === null) {
+            self::$logger = new Logger();
+        }
         
         // Verifica se a conexão ainda não foi estabelecida
         if (null == self::$cont) {
@@ -56,6 +53,11 @@ class Banco
 
     // Função para executar uma query SQL e retornar o resultado
     public static function query($sql){
+        // Inicializa o Logger
+        if (self::$logger === null) {
+            self::$logger = new Logger();
+        }
+
         try{
             // Conectar ao banco de dados
             $conn self::conectar();
@@ -64,9 +66,11 @@ class Banco
             // Executar a query
             $stmt ->execute();
             // Retornar todos os resultados
-            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);s
+            self::$logger->info('Query executada' . $stmt);
         } catch (PDOException $exception) {
             // Em caso de erro, retornar a mensagem
+            self::$logger->error('Erro ao executar a query: ' . $exception->getMessage());
             die($exception->getMessage())
         }
     }
