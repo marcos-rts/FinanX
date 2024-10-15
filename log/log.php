@@ -3,7 +3,7 @@
 class Logger {
     private $logFile;
 
-    public function __construct($logFile = 'log/app.log') {
+    public function __construct($logFile = '../log/app.log') {
         $this->logFile = $logFile;
     }
 
