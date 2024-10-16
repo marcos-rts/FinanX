@@ -13,14 +13,14 @@ class Banco
     private static $logger; // Criação de uma instância do Logger como estática
 
     // Construtor privado para evitar a instância da classe diretamente
-    public function __construct()
-    {
+    private function __construct(){
+        // Inicializar o Logger
         if (self::$logger === null) {
             self::$logger = new Logger();
+            self::$logger->info('Logger inicializado');
         }
         // Construtor agora é público, permitindo a criação de instâncias
-        self::$logger->info('Instancia criada');
-
+        // self::$logger->info('Instancia criada');
     }
 
     // Método estático para conectar ao banco de dados
@@ -43,17 +43,18 @@ class Banco
             } catch (PDOException $exception) {
                 // Em caso de erro na conexão
                 self::$logger->error('Erro ao conectar ao banco de dados: ' . $exception->getMessage());
-
                 die($exception->getMessage());
             }
         }
         // Retorna a conexão estabelecida
         return self::$cont;
     }
+
     // Método estático para desconectar do banco de dados
     public static function desconectar()
     {
         self::$cont = null;
+        self::$logger->info('Desconectado do banco de dados');
     }
 
     // Função para executar uma query SQL e retornar o resultado
