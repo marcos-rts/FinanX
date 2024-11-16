@@ -2,10 +2,10 @@ SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
 SET time_zone = "+00:00";
 --
--- Banco de dados: `finanx`
+-- Banco de dados: `finanx_beta`
 --
-CREATE DATABASE IF NOT EXISTS `finanx` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
-USE `finanx`;
+CREATE DATABASE IF NOT EXISTS `finanx_beta` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+USE `finanx_beta`;
 
 -- --------------------------------------------------------
 
