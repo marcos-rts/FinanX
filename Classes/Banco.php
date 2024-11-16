@@ -3,7 +3,7 @@ include './log/log.php';
 // Definição classe Banco
 class Banco
 {
-    private static $DB_nome = 'finanx'; // Nome do banco de dados
+    private static $DB_nome = 'finanx_beta'; // Nome do banco de dados
     private static $DB_host = 'localhost'; // Endereço host do banco de dados
     private static $DB_port = '3306'; // Porta personalizada
     private static $DB_usuario = 'root'; // Nome de usuário
