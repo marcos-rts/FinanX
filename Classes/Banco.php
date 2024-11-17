@@ -58,15 +58,16 @@ class Banco
     }
 
     // Função para executar uma query SQL e retornar o resultado
-    public function query($sql){
+    public static function query($sql){
         // Inicializa o Logger
         if (self::$logger === null) {
             self::$logger = new Logger();
         }
 
         try{
-            // Conectar ao banco de dados
-            $conn = Banco::conectar();
+            // Estabelece a conexão automaticamente
+            $conn = self::conectar();
+
             // Preparar a query
             $stmt = $conn->prepare($sql);
             // Executar a query
