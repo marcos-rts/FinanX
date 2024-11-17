@@ -66,6 +66,14 @@
             </form>
         </div>
         <br>
+        <?php
+            require_once '../Classes/Banco.php';
+            $sql = "SELECT * FROM Categoria;";
+            $resultado = Banco::query($sql);
+            foreach ($resultado as $linha) {
+                print_r("<strong> ID: " .  $linha['id'] . " Categoria: " . $linha['nome'] . "</strong>");
+            };
+        ?>
         <br>
         Lista de categorias
     </div>
