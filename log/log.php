@@ -9,6 +9,8 @@ class Logger {
     // Por padrão, usa '../log/app.log' se nenhum caminho for fornecido
     public function __construct($logFile = '../log/app.log') {
         $this->logFile = $logFile; // Atribui o caminho do arquivo à propriedade logFile
+        // Define o fuso horário para o horário de Brasília
+        date_default_timezone_set('America/Sao_Paulo');
     }
 
     // Método para registrar uma mensagem de log com um nível especificado
