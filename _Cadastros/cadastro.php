@@ -7,5 +7,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Inserir o categoria no banco de dados
     $sql = "INSERT INTO categoria (nome) VALUES ('$categoria')";
 
-    Banco::query($sql);}
+    Banco::query($sql);
+}
 ?>
