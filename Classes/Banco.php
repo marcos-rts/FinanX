@@ -77,7 +77,9 @@ class Banco
             self::$logger->info('Query executada: ' . $sql);
 
             // Retornar todos os resultados
-            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+            $resultados = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            self::$logger->info('Query executada com sucesso. Total de resultados: ' . count($resultados));
+            return $resultados;
         } catch (PDOException $exception) {
             // Em caso de erro, retornar a mensagem
             self::$logger->error('Erro ao executar a query: ' . $exception->getMessage());
