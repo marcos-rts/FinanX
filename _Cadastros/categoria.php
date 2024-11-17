@@ -66,7 +66,6 @@
             </form>
         </div>
         <br>
-        [...]
         <br>
         Lista de categorias
     </div>
