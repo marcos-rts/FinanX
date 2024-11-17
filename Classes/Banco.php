@@ -3,7 +3,7 @@ include '../log/log.php';
 // Definição classe Banco
 class Banco
 {
-    private static $DB_nome = 'finanx'; // Nome do banco de dados
+    private static $DB_nome = 'finanx_beta'; // Nome do banco de dados
     private static $DB_host = 'localhost'; // Endereço host do banco de dados
     private static $DB_port = '3306'; // Porta personalizada
     private static $DB_usuario = 'root'; // Nome de usuário
@@ -13,14 +13,14 @@ class Banco
     private static $logger; // Criação de uma instância do Logger como estática
 
     // Construtor privado para evitar a instância da classe diretamente
-    public function __construct()
-    {
+    private function __construct(){
+        // Inicializar o Logger
         if (self::$logger === null) {
             self::$logger = new Logger();
+            self::$logger->info('Logger inicializado');
         }
         // Construtor agora é público, permitindo a criação de instâncias
-        self::$logger->info('Instancia criada');
-
+        // self::$logger->info('Instancia criada');
     }
 
     // Método estático para conectar ao banco de dados
@@ -43,29 +43,31 @@ class Banco
             } catch (PDOException $exception) {
                 // Em caso de erro na conexão
                 self::$logger->error('Erro ao conectar ao banco de dados: ' . $exception->getMessage());
-
                 die($exception->getMessage());
             }
         }
         // Retorna a conexão estabelecida
         return self::$cont;
     }
+
     // Método estático para desconectar do banco de dados
     public static function desconectar()
     {
         self::$cont = null;
+        self::$logger->info('Desconectado do banco de dados');
     }
 
     // Função para executar uma query SQL e retornar o resultado
-    public function query($sql){
+    public static function query($sql){
         // Inicializa o Logger
         if (self::$logger === null) {
             self::$logger = new Logger();
         }
 
         try{
-            // Conectar ao banco de dados
-            $conn = Banco::conectar();
+            // Estabelece a conexão automaticamente
+            $conn = self::conectar();
+
             // Preparar a query
             $stmt = $conn->prepare($sql);
             // Executar a query
@@ -75,7 +77,9 @@ class Banco
             self::$logger->info('Query executada: ' . $sql);
 
             // Retornar todos os resultados
-            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+            $resultados = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            self::$logger->info('Query executada com sucesso. Total de resultados: ' . count($resultados));
+            return $resultados;
         } catch (PDOException $exception) {
             // Em caso de erro, retornar a mensagem
             self::$logger->error('Erro ao executar a query: ' . $exception->getMessage());
