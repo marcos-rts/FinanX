@@ -1,33 +1,35 @@
 <?php
-include './log/log.php';
+include '../log/log.php';
 // Definição classe Banco
 class Banco
 {
-    private static $DB_nome = 'teste'; // Nome do banco de dados
+    private static $DB_nome = 'finanx_beta'; // Nome do banco de dados
     private static $DB_host = 'localhost'; // Endereço host do banco de dados
     private static $DB_port = '3306'; // Porta personalizada
     private static $DB_usuario = 'root'; // Nome de usuário
     private static $DB_senha = ''; // Senha do usuário
-
-    // Variável estática privada para armazenar a conexão com o banco de dados
-    private static $cont = null;
-
-        // Criação de uma instância do Logger como estática
-        private static $logger;
+    // -----------------------------------------------------------------------------------
+    private static $cont = null; // Variável estática privada para armazenar a conexão com o banco de dados
+    private static $logger; // Criação de uma instância do Logger como estática
 
     // Construtor privado para evitar a instância da classe diretamente
-    private function __construct()
-    {
-        die('A função não é permitido');
+    private function __construct(){
+        // Inicializar o Logger
+        if (self::$logger === null) {
+            self::$logger = new Logger();
+            self::$logger->info('Logger inicializado');
+        }
+        // Construtor agora é público, permitindo a criação de instâncias
+        // self::$logger->info('Instancia criada');
     }
 
     // Método estático para conectar ao banco de dados
     public static function conectar()
     {
-                // Inicializa o Logger
-                if (self::$logger === null) {
-                    self::$logger = new Logger();
-                }
+        // Inicializa o Logger
+        if (self::$logger === null) {
+            self::$logger = new Logger();
+        }
         
         // Verifica se a conexão ainda não foi estabelecida
         if (null == self::$cont) {
@@ -41,34 +43,48 @@ class Banco
             } catch (PDOException $exception) {
                 // Em caso de erro na conexão
                 self::$logger->error('Erro ao conectar ao banco de dados: ' . $exception->getMessage());
-
                 die($exception->getMessage());
             }
         }
         // Retorna a conexão estabelecida
         return self::$cont;
     }
+
     // Método estático para desconectar do banco de dados
     public static function desconectar()
     {
         self::$cont = null;
+        self::$logger->info('Desconectado do banco de dados');
     }
 
-    // // Função para executar uma query SQL e retornar o resultado
-    // public static function query($sql){
-    //     try{
-    //         // Conectar ao banco de dados
-    //         $conn self::conectar();
-    //         // Preparar a query
-    //         $stmt = $conn->prepare($sql);
-    //         // Executar a query
-    //         $stmt ->execute();
-    //         // Retornar todos os resultados
-    //         return $stmt->fetchAll(PDO::FETCH_ASSOC);
-    //     } catch (PDOException $exception) {
-    //         // Em caso de erro, retornar a mensagem
-    //         die($exception->getMessage())
-    //     }
-    // }
+    // Função para executar uma query SQL e retornar o resultado
+    public static function query($sql){
+        // Inicializa o Logger
+        if (self::$logger === null) {
+            self::$logger = new Logger();
+        }
+
+        try{
+            // Estabelece a conexão automaticamente
+            $conn = self::conectar();
+
+            // Preparar a query
+            $stmt = $conn->prepare($sql);
+            // Executar a query
+            $stmt ->execute();
+
+            // Log da execução da query
+            self::$logger->info('Query executada: ' . $sql);
+
+            // Retornar todos os resultados
+            $resultados = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            self::$logger->info('Query executada com sucesso. Total de resultados: ' . count($resultados));
+            return $resultados;
+        } catch (PDOException $exception) {
+            // Em caso de erro, retornar a mensagem
+            self::$logger->error('Erro ao executar a query: ' . $exception->getMessage());
+            die($exception->getMessage());
+        }
+    }
 }
 ?>
