@@ -1,3 +1,10 @@
+<?php
+require_once '../Classes/Banco.php';
+require_once '../log/log.php';
+// Inicializa o Logger
+$logger = new Logger();
+?>
+
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -67,11 +74,11 @@
         </div>
         <br>
         <?php
-            require_once '../Classes/Banco.php';
             $sql = "SELECT * FROM Categoria;";
             $resultado = Banco::query($sql);
             foreach ($resultado as $linha) {
                 print_r("<strong> ID: " .  $linha['id'] . " Categoria: " . $linha['nome'] . "</strong>");
+                $logger->info("Exibido lista de Categorias");
             };
         ?>
         <br>
