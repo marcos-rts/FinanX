@@ -119,7 +119,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         <input type="text" class="form-control" id="subcategoria" name="subcategoria" aria-describedby="subcategoria"
                             placeholder="nome subcategoria">
                     </div>
-                    <button type="submit" class="btn btn-primary">Enviar</button>
+                </div>
+                <button type="submit" class="btn btn-primary">Enviar</button>
             </form>
         </div>
         <br>
