@@ -131,6 +131,7 @@ class Banco
             }
             echo "Arquivo .sql executado com sucesso!";
             self::$logger->info("Arquivo .sql executado com sucesso!");
+            return $resultados;
         } catch (PDOException $e) {
             echo "Erro de conexão: " . $e->getMessage();
             self::$logger->error("Erro de conexão: " . $e->getMessage());
