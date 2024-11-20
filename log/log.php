@@ -1,50 +1,80 @@
 <?php
 
-// Definindo a classe Logger, que gerencia o registro de mensagens em um arquivo de log
-class Logger {
-    // Propriedade privada para armazenar o caminho do arquivo de log
+/**
+ * Classe Logger para gerenciar o registro de mensagens em um arquivo de log.
+ */
+class Logger
+{
+    /**
+     * @var string Caminho do arquivo de log.
+     */
     private $logFile;
 
-    // Construtor da classe, que define o caminho do arquivo de log
-    // Por padrão, usa '../log/app.log' se nenhum caminho for fornecido
-    public function __construct($logFile = '../log/app.log') {
-        $this->logFile = $logFile; // Atribui o caminho do arquivo à propriedade logFile
-        // Define o fuso horário para o horário de Brasília
-        date_default_timezone_set('America/Sao_Paulo');
+    /**
+     * Construtor da classe Logger.
+     * Define o caminho do arquivo de log e o fuso horário.
+     * 
+     * @param string $logFile Caminho do arquivo de log (opcional). 
+     *                        Padrão: '../log/app.log'.
+     */
+    public function __construct($logFile = '../log/app.log')
+    {
+        $this->logFile = $logFile;
+        date_default_timezone_set('America/Sao_Paulo'); // Define o fuso horário.
     }
 
-    // Método para registrar uma mensagem de log com um nível especificado
-    public function log($message, $level = 'INFO') {
-        // Obtendo o timestamp atual no formato 'Y-m-d H:i:s'
-        $timestamp = date('Y-m-d H:i:s');
-        // Formatando a mensagem de log com o timestamp, nível e mensagem
-        $formattedMessage = "[$timestamp] [$level] $message" . PHP_EOL;
-
-        // Escrevendo a mensagem formatada no arquivo de log, anexando ao final do arquivo
-        file_put_contents($this->logFile, $formattedMessage, FILE_APPEND);
+    /**
+     * Registra uma mensagem no arquivo de log.
+     * 
+     * @param string $message Mensagem a ser registrada.
+     * @param string $level   Nível da mensagem (INFO, WARNING, ERROR).
+     */
+    private function log($message, $level = 'INFO')
+    {
+        $timestamp = date('Y-m-d H:i:s'); // Obtém o horário atual.
+        $formattedMessage = "[$timestamp] [$level] $message" . PHP_EOL; // Formata a mensagem.
+        file_put_contents($this->logFile, $formattedMessage, FILE_APPEND); // Grava no arquivo de log.
     }
 
-    // Método para registrar uma mensagem com nível INFO
-    public function info($message) {
-        $this->log($message, 'INFO'); // Chama o método log com nível 'INFO'
+    /**
+     * Registra uma mensagem com nível INFO.
+     * 
+     * @param string $message Mensagem a ser registrada.
+     */
+    public function info($message)
+    {
+        $this->log($message, 'INFO');
     }
 
-    // Método para registrar uma mensagem com nível WARNING
-    public function warning($message) {
-        $this->log($message, 'WARNING'); // Chama o método log com nível 'WARNING'
+    /**
+     * Registra uma mensagem com nível WARNING.
+     * 
+     * @param string $message Mensagem a ser registrada.
+     */
+    public function warning($message)
+    {
+        $this->log($message, 'WARNING');
     }
 
-    // Método para registrar uma mensagem com nível ERROR
-    public function error($message) {
-        $this->log($message, 'ERROR'); // Chama o método log com nível 'ERROR'
+    /**
+     * Registra uma mensagem com nível ERROR.
+     * 
+     * @param string $message Mensagem a ser registrada.
+     */
+    public function error($message)
+    {
+        $this->log($message, 'ERROR');
     }
 }
 
-// Exemplo de uso:
-// Cria uma nova instância da classe Logger, que irá usar o caminho padrão do arquivo de log
-// $logger = new Logger();
+# =================== Exemplo de Uso ===================
 
-// Registrando diferentes níveis de log:
-// $logger->info('Este é um log de informação.'); // Log de nível INFO
-// $logger->warning('Este é um log de aviso.'); // Log de nível WARNING
-// $logger->error('Este é um log de erro.'); // Log de nível ERROR
+/*
+ * Instancie o Logger (o arquivo padrão será '../log/app.log').
+ * Caso precise personalizar o caminho do arquivo, passe como argumento.
+ */
+
+// $logger = new Logger();
+// $logger->info('Mensagem de informação.');
+// $logger->warning('Mensagem de aviso.');
+// $logger->error('Mensagem de erro.');
