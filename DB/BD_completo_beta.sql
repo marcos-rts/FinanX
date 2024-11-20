@@ -2,10 +2,10 @@ SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
 SET time_zone = "+00:00";
 --
--- Banco de dados: `finanx`
+-- Banco de dados: `finanx_beta`
 --
-CREATE DATABASE IF NOT EXISTS `finanx` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
-USE `finanx`;
+CREATE DATABASE IF NOT EXISTS `finanx_beta` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+USE `finanx_beta`;
 
 -- --------------------------------------------------------
 
@@ -95,7 +95,3 @@ ALTER TABLE `transacao`
   ADD CONSTRAINT `transacao_ibfk_1` FOREIGN KEY (`subcategoria_id`) REFERENCES `subcategoria` (`id`),
   ADD CONSTRAINT `transacao_ibfk_2` FOREIGN KEY (`mes_id`) REFERENCES `mes` (`id`);
 COMMIT;
-
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

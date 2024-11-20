@@ -1,86 +1,116 @@
 <?php
 include '../log/log.php';
 // Definição classe Banco
+// Classe Banco aprimorada com melhorias na lógica de logs
 class Banco
 {
-    private static $DB_nome = 'finanx'; // Nome do banco de dados
+    private static $DB_nome = 'finanx_beta'; // Nome do banco de dados
     private static $DB_host = 'localhost'; // Endereço host do banco de dados
     private static $DB_port = '3306'; // Porta personalizada
     private static $DB_usuario = 'root'; // Nome de usuário
     private static $DB_senha = ''; // Senha do usuário
-    // -----------------------------------------------------------------------------------
     private static $cont = null; // Variável estática privada para armazenar a conexão com o banco de dados
     private static $logger; // Criação de uma instância do Logger como estática
 
-    // Construtor privado para evitar a instância da classe diretamente
-    public function __construct()
+    private function __construct()
     {
-        if (self::$logger === null) {
-            self::$logger = new Logger();
-        }
-        // Construtor agora é público, permitindo a criação de instâncias
-        self::$logger->info('Instancia criada');
-
+        // Inicializa o Logger apenas uma vez
+        self::initLogger();
     }
 
-    // Método estático para conectar ao banco de dados
-    public static function conectar()
+    // Método para inicializar o Logger, usado internamente
+    private static function initLogger()
     {
-        // Inicializa o Logger
         if (self::$logger === null) {
             self::$logger = new Logger();
+            self::$logger->info('Logger inicializado');
         }
-        
-        // Verifica se a conexão ainda não foi estabelecida
-        if (null == self::$cont) {
+    }
+
+    public static function conectar()
+    {
+        self::initLogger();
+
+        if (self::$cont === null) {
             try {
-                // Monta a string de conexão (DSN)
                 $parametros = "mysql:host=" . self::$DB_host . ";port=" . self::$DB_port . ";dbname=" . self::$DB_nome;
-                // Cria uma nova instância de PDO
                 self::$cont = new PDO($parametros, self::$DB_usuario, self::$DB_senha);
-                self::$logger->info('Conectado ao banco de dados ' . self::$DB_host);
-
+                self::$logger->info('Conexão com o banco estabelecida. ', ['host' => self::$DB_host, 'db' => self::$DB_nome] );
             } catch (PDOException $exception) {
-                // Em caso de erro na conexão
-                self::$logger->error('Erro ao conectar ao banco de dados: ' . $exception->getMessage());
-
+                self::$logger->error('Erro ao conectar ao banco.', ['mensagem' => $exception->getMessage()]);
                 die($exception->getMessage());
             }
         }
-        // Retorna a conexão estabelecida
+
         return self::$cont;
     }
-    // Método estático para desconectar do banco de dados
+
     public static function desconectar()
     {
-        self::$cont = null;
+        self::initLogger();
+
+        if (self::$cont !== null) {
+            self::$cont = null;
+            self::$logger->info('Conexão com o banco encerrada.');
+        }
     }
 
-    // Função para executar uma query SQL e retornar o resultado
-    public function query($sql){
-        // Inicializa o Logger
-        if (self::$logger === null) {
-            self::$logger = new Logger();
-        }
+    public static function query($sql)
+    {
+        self::initLogger();
 
-        try{
-            // Conectar ao banco de dados
-            $conn = Banco::conectar();
-            // Preparar a query
+        try {
+            $conn = self::conectar();
             $stmt = $conn->prepare($sql);
-            // Executar a query
-            $stmt ->execute();
+            $stmt->execute();
+            $resultados = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-            // Log da execução da query
-            self::$logger->info('Query executada: ' . $sql);
+            self::$logger->info('Query executada com sucesso.', [
+                'sql' => $sql,
+                'resultados' => count($resultados)
+            ]);
 
-            // Retornar todos os resultados
-            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+            return $resultados;
         } catch (PDOException $exception) {
-            // Em caso de erro, retornar a mensagem
-            self::$logger->error('Erro ao executar a query: ' . $exception->getMessage());
+            self::$logger->error('Erro ao executar a query.', [
+                'sql' => $sql,
+                'mensagem' => $exception->getMessage()
+            ]);
             die($exception->getMessage());
         }
     }
+
+    public static function installDb()
+    {
+        self::initLogger();
+
+        try {
+            $conn = self::conectar();
+            $sqlFilePath = './DB/BD_completo_beta.sql';
+
+            if (!file_exists($sqlFilePath)) {
+                $mensagem = "Arquivo .sql não encontrado: $sqlFilePath";
+                self::$logger->error($mensagem);
+                throw new Exception($mensagem);
+            }
+
+            $sqlContent = file_get_contents($sqlFilePath);
+            $queries = explode(";", $sqlContent);
+
+            foreach ($queries as $query) {
+                $query = trim($query);
+                if (!empty($query)) {
+                    $stmt = $conn->prepare($query);
+                    $stmt->execute();
+                }
+            }
+
+            self::$logger->info('Arquivo .sql executado com sucesso.', ['caminho' => $sqlFilePath]);
+        } catch (Exception $e) {
+            self::$logger->error('Erro durante a instalação do banco.', [
+                'mensagem' => $e->getMessage()
+            ]);
+        }
+    }
 }
-?>
+
