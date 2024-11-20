@@ -76,7 +76,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                             Cadastro
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item active" href="_Cadastros/categoria.html">Categoria <span class="sr-only">(página atual)</span></a>
+                            <a class="dropdown-item" href="../_Cadastros/categoria.php">Categoria</a>
+                            <a class="dropdown-item active" href="../_Cadastros/subcategoria.php">Subcategoria <span class="sr-only">(página atual)</span></a>
                             <a class="dropdown-item" href="#">Outra ação</a>
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item" href="#">Algo mais aqui</a>
