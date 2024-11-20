@@ -126,17 +126,17 @@ class Banco
 
                     // Retornar todos os resultados
                     $resultados = $stmt->fetchAll(PDO::FETCH_ASSOC);
-                    self::$logger->info('Query executada com sucesso. Total de resultados: ' . count($resultados));
+                    // self::$logger->info('Query executada com sucesso. Total de resultados: ' . count($resultados));
                 }
             }
-            echo "Arquivo .sql executado com sucesso!";
-            self::$logger->info("Arquivo .sql executado com sucesso!");
+            // echo "Arquivo .sql executado com sucesso!";
+            self::$logger->info("Arquivo .sql em {$sqlFilePath} executado com sucesso!");
             return $resultados;
         } catch (PDOException $e) {
-            echo "Erro de conexão: " . $e->getMessage();
+            // echo "Erro de conexão: " . $e->getMessage();
             self::$logger->error("Erro de conexão: " . $e->getMessage());
         } catch (Exception $e) {
-            echo "Erro: " . $e->getMessage();
+            // echo "Erro: " . $e->getMessage();
             self::$logger->error("Erro: " . $e->getMessage());
         }
     }
