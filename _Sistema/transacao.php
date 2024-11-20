@@ -119,7 +119,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <form method="POST">
                 <div class="form-group">
                     <label for="valor">valor</label>
-                    <input type="number" class="form-control" id="valor" name="valor" aria-describedby="Categoria"
+                    <input type="number" class="form-control" id="valor" step="0.010" name="valor" aria-describedby="Categoria"
                         placeholder="valor da Transação">
                     <br>
                     <label for="tipo">Tipo da transação</label>
