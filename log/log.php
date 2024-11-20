@@ -1,71 +1,59 @@
 <?php
 
 /**
- * Classe Logger para gerenciar o registro de mensagens em um arquivo de log.
+ * Classe Logger para registrar mensagens em um arquivo de log.
  */
 class Logger
 {
-    /**
-     * @var string Caminho do arquivo de log.
-     */
-    private $logFile;
+    private $logFile; // Caminho do arquivo de log.
 
     /**
-     * Construtor da classe Logger.
-     * Define o caminho do arquivo de log e o fuso horário.
-     * 
-     * @param string $logFile Caminho do arquivo de log (opcional). 
-     *                        Padrão: '../log/app.log'.
+     * Construtor para inicializar o Logger com o caminho do arquivo de log.
+     * @param string $logFile Caminho do arquivo de log. Padrão: '../log/app.log'.
      */
     public function __construct($logFile = '../log/app.log')
     {
         $this->logFile = $logFile;
-        date_default_timezone_set('America/Sao_Paulo'); // Define o fuso horário.
+        date_default_timezone_set('America/Sao_Paulo');
     }
 
     /**
-     * Registra uma mensagem no arquivo de log.
-     * 
-     * @param string $message Mensagem a ser registrada.
-     * @param string $level   Nível da mensagem (INFO, WARNING, ERROR).
+     * Registra uma mensagem no log com informações adicionais.
+     * @param string $message Mensagem de log.
+     * @param string $level Nível da mensagem (INFO, WARNING, ERROR).
+     * @param array|null $context Dados adicionais (opcional).
      */
-    private function log($message, $level = 'INFO')
+    private function log($message, $level = 'INFO', array $context = null)
     {
-        $timestamp = date('Y-m-d H:i:s'); // Obtém o horário atual.
-        $formattedMessage = "[$timestamp] [$level] $message" . PHP_EOL; // Formata a mensagem.
-        file_put_contents($this->logFile, $formattedMessage, FILE_APPEND); // Grava no arquivo de log.
+        $timestamp = date('Y-m-d H:i:s');
+        $formattedMessage = "[$timestamp] [$level] $message";
+
+        // Adicionar o contexto ao log, se disponível.
+        if ($context) {
+            $contextString = json_encode($context, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
+            $formattedMessage .= " | Contexto: $contextString";
+        }
+
+        $formattedMessage .= PHP_EOL;
+        file_put_contents($this->logFile, $formattedMessage, FILE_APPEND);
     }
 
-    /**
-     * Registra uma mensagem com nível INFO.
-     * 
-     * @param string $message Mensagem a ser registrada.
-     */
-    public function info($message)
+    public function info($message, array $context = null)
     {
-        $this->log($message, 'INFO');
+        $this->log($message, 'INFO', $context);
     }
 
-    /**
-     * Registra uma mensagem com nível WARNING.
-     * 
-     * @param string $message Mensagem a ser registrada.
-     */
-    public function warning($message)
+    public function warning($message, array $context = null)
     {
-        $this->log($message, 'WARNING');
+        $this->log($message, 'WARNING', $context);
     }
 
-    /**
-     * Registra uma mensagem com nível ERROR.
-     * 
-     * @param string $message Mensagem a ser registrada.
-     */
-    public function error($message)
+    public function error($message, array $context = null)
     {
-        $this->log($message, 'ERROR');
+        $this->log($message, 'ERROR', $context);
     }
 }
+
 
 # =================== Exemplo de Uso ===================
 
