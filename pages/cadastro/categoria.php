@@ -1,37 +1,28 @@
 <?php
-require_once '../Classes/Banco.php';
-require_once '../log/log.php';
+require_once '../config/Classes/Banco.php';
+require_once '../config/log/log.php';
 // Inicializa o Logger
 $logger = new Logger();
-// var_dump($_POST);
-
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Verifica se o campo 'subcategoria' está presente
-    if (!empty($_POST['subcategoria'])) {
-        if (!empty($_POST['categoria'])) {
-            $subcategoria = trim($_POST['subcategoria']);
-            $categoria = trim($_POST['categoria']);
+    // Verifica se o campo 'categoria' está presente
+    if (!empty($_POST['categoria'])) {
+        $categoria = trim($_POST['categoria']);
 
-            // Prepara a query para inserir no banco de dados
-            $sql = "INSERT INTO subcategoria (nome, categoria_id) VALUES ('$subcategoria', '$categoria')";
+        // Prepara a query para inserir no banco de dados
+        $sql = "INSERT INTO categoria (nome) VALUES ('$categoria')";
 
-            try {
-                // Executa a query
-                Banco::query($sql);
-                $logger->info("subcategoria '{$subcategoria}' inserida com sucesso.");
-                echo "<div class='alert alert-success'>subcategoria inserida com sucesso!</div>";
-            } catch (Exception $e) {
-                $logger->error("Erro ao inserir subcategoria: " . $e->getMessage());
-                echo "<div class='alert alert-danger'>Erro ao inserir subcategoria. Tente novamente.</div>";
-            }
-        } else {
-            $logger->error("Tentativa de Inserção sem a Categoria");
-            echo "<div class='alert alert-warning'>O campo 'Categoria' é obrigatório!</div>";
+        try {
+            // Executa a query
+            Banco::query($sql);
+            $logger->info("Categoria '{$categoria}' inserida com sucesso.");
+            echo "<div class='alert alert-success'>Categoria inserida com sucesso!</div>";
+        } catch (Exception $e) {
+            $logger->error("Erro ao inserir categoria: " . $e->getMessage());
+            echo "<div class='alert alert-danger'>Erro ao inserir categoria. Tente novamente.</div>";
         }
     } else {
-        $logger->error("Tentativa de Inserção sem a Subcategoria");
-        echo "<div class='alert alert-warning'>O campo 'subcategoria' é obrigatório!</div>";
+        echo "<div class='alert alert-warning'>O campo 'Categoria' é obrigatório!</div>";
     }
 }
 
@@ -76,8 +67,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                             Cadastro
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="../_Cadastros/categoria.php">Categoria</a>
-                            <a class="dropdown-item active" href="../_Cadastros/subcategoria.php">Subcategoria <span class="sr-only">(página atual)</span></a>
+                            <a class="dropdown-item active" href="../_Cadastros/categoria.php">Categoria <span class="sr-only">(página atual)</span></a>
+                            <a class="dropdown-item" href="../_Cadastros/subcategoria.php">Subcategoria</a>
                             <a class="dropdown-item" href="#">Outra ação</a>
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item" href="#">Algo mais aqui</a>
@@ -99,45 +90,28 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <br>
             <form method="POST">
                 <div class="form-group">
-                    <div class="form-group">
-                        <label for="categoria">Select de exemplo</label>
-                        <select class="form-control" name="categoria" id="categoria">
-                            <?php
-                            $sql = "SELECT * FROM categoria;";
-                            $resultado = Banco::query($sql);
-                            if ($resultado) {
-                                foreach ($resultado as $linha) {
-                                    echo "<option value='" . $linha['id'] . "'>{$linha['nome']}</option>";
-                                }
-                                # code...
-                            } else {
-                                echo "Nenhuma Categoria encontrada.";
-                            }
-                            ?>
-                        </select>
-                        <label for="subcategoria">subcategoria</label>
-                        <input type="text" class="form-control" id="subcategoria" name="subcategoria" aria-describedby="subcategoria"
-                            placeholder="nome subcategoria">
-                    </div>
+                    <label for="categoria">Categoria</label>
+                    <input type="text" class="form-control" id="categoria" name="categoria" aria-describedby="Categoria"
+                        placeholder="nome categoria">
                 </div>
                 <button type="submit" class="btn btn-primary">Enviar</button>
             </form>
         </div>
         <br>
         <?php
-        $sql = "SELECT * FROM subcategoria;";
+        $sql = "SELECT * FROM Categoria;";
         $resultado = Banco::query($sql);
         if ($resultado) {
             foreach ($resultado as $linha) {
-                echo "<p><strong>ID:</strong> {$linha['id']} <strong>subcategoria:</strong> {$linha['nome']}</p>";
+                echo "<p><strong>ID:</strong> {$linha['id']} <strong>Categoria:</strong> {$linha['nome']}</p>";
             }
-            $logger->info("Lista de subcategorias exibida.");
+            $logger->info("Lista de categorias exibida.");
         } else {
-            echo "<p>Nenhuma subcategoria encontrada.</p>";
+            echo "<p>Nenhuma categoria encontrada.</p>";
         }
         ?>
         <br>
-        Lista de subcategorias
+        Lista de categorias
     </div>
 
     <footer class="bg-dark text-white fixed-bottom text-center p-3">
