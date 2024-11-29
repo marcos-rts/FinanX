@@ -1,5 +1,5 @@
 <?php
-include '../log/log.php';
+include ('../../config/log/log.php');
 // Definição classe Banco
 // Classe Banco aprimorada com melhorias na lógica de logs
 class Banco
@@ -35,7 +35,7 @@ class Banco
             try {
                 $parametros = "mysql:host=" . self::$DB_host . ";port=" . self::$DB_port . ";dbname=" . self::$DB_nome;
                 self::$cont = new PDO($parametros, self::$DB_usuario, self::$DB_senha);
-                self::$logger->info('Conexão com o banco estabelecida. ', ['host' => self::$DB_host, 'db' => self::$DB_nome] );
+                self::$logger->info('Conexão com o banco estabelecida. ', ['host' => self::$DB_host, 'db' => self::$DB_nome]);
             } catch (PDOException $exception) {
                 self::$logger->error('Erro ao conectar ao banco.', ['mensagem' => $exception->getMessage()]);
                 die($exception->getMessage());
@@ -86,7 +86,7 @@ class Banco
 
         try {
             $conn = self::conectar();
-            $sqlFilePath = './DB/BD_completo_beta.sql';
+            $sqlFilePath = '../config/database/BD_completo_beta.sql';
 
             if (!file_exists($sqlFilePath)) {
                 $mensagem = "Arquivo .sql não encontrado: $sqlFilePath";
@@ -113,4 +113,3 @@ class Banco
         }
     }
 }
-

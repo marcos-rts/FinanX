@@ -11,7 +11,7 @@ class Logger
      * Construtor para inicializar o Logger com o caminho do arquivo de log.
      * @param string $logFile Caminho do arquivo de log. Padrão: '../log/app.log'.
      */
-    public function __construct($logFile = '../log/app.log')
+    public function __construct($logFile = '../../config/log/app.log')
     {
         $this->logFile = $logFile;
         date_default_timezone_set('America/Sao_Paulo');
