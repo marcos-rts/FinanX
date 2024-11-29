@@ -1,6 +1,6 @@
 <?php
-require_once '../config/Classes/Banco.php';
-require_once '../config/log/log.php';
+require_once '../../config/Classes/Banco.php';
+require_once '../../config/log/log.php';
 // Inicializa o Logger
 $logger = new Logger();
 
