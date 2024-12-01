@@ -1,6 +1,6 @@
-<footer class="bg-dark text-white fixed-bottom text-center p-3">
+<!-- <footer class="bg-dark text-white text-center p-3">
         <p>Desenvolvido por Marcos Santos - © 2024</p>
-    </footer>
+    </footer> -->
 
     <!-- JavaScript (Opcional) -->
     <!-- jQuery primeiro, depois Popper.js, depois Bootstrap JS -->
