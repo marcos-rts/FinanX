@@ -20,7 +20,7 @@ include '../../includes/header.php'
             </thead>
             <tbody>
                 <!-- Exemplo de item, esses valores serão gerados dinamicamente -->
-                <tr>
+                <!-- <tr>
                     <td>1</td>
                     <td>Subcategoria Exemplo</td>
                     <td>Categoria Exemplo</td>
@@ -28,7 +28,7 @@ include '../../includes/header.php'
                         <a href="editar_subcategoria.html?id=1" class="btn btn-warning btn-sm">Editar</a>
                         <button class="btn btn-danger btn-sm">Excluir</button>
                     </td>
-                </tr>
+                </tr> -->
                 <?php
                 $sql = "SELECT s.id, s.nome as subcategoria, c.nome as categoria FROM subcategoria AS s join categoria AS c on s.categoria_id = c.id";
                 $resultado = Banco::query($sql);

@@ -60,7 +60,20 @@ if (!isset($_SESSION['UsuarioID'])) {
                             <a class="dropdown-item" href="<?= BASE_URL ?>pages/Configuracoes/listagem_categorias.php">Categoria</a>
                             <a class="dropdown-item" href="<?= BASE_URL ?>pages/Configuracoes/listagem_subcategoria.php">Subcategoria</a>
                             <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="#">Algo mais aqui</a>
+                            <?php
+                            if (empty($_SESSION['UsuarioID'])){
+                                ?>
+                                <a class="dropdown-item disabled" href="#">Configurações</a>
+                                <?php
+                            }else{
+                                ?>
+                                <a class="dropdown-item" href="#">Conta</a>
+                                <a class="dropdown-item" href="#">Metodo Pagamento</a>
+                                <a class="dropdown-item" href="#">Eventos</a>
+                                <?php
+                            };
+                            ?>
+                            <!-- <a class="dropdown-item" href="#">Algo mais aqui</a> -->
                         </div>
                     </li>
                     <li class="nav-item">
