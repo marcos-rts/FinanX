@@ -47,7 +47,7 @@ define('BASE_URL', '/GitHub/FinanX/'); // Substitua '/meu-projeto/' pelo caminho
                             Configurações
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="<?= BASE_URL ?>pages/Configuracoes/categorias.php">Categoria</a>
+                            <a class="dropdown-item" href="<?= BASE_URL ?>pages/Configuracoes/listagem_categorias.php">Categoria</a>
                             <a class="dropdown-item" href="<?= BASE_URL ?>pages/cadastro/subcategoria.php">Subcategoria</a>
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item" href="#">Algo mais aqui</a>
