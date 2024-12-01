@@ -52,7 +52,7 @@ if (!isset($_SESSION['UsuarioID'])) {
                         <a class="nav-link" href="<?= BASE_URL ?>pages/em_construcao.html">Dashboard</a>
                     </li>
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                        <a class="nav-link dropdown-toggle" href="" id="navbarDropdown" role="button"
                             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             Configurações
                         </a>
