@@ -1,5 +1,19 @@
+<?php
+
+// A sessão precisa ser iniciada em cada página diferente
+if (!isset($_SESSION)) session_start();
+
+// Verifica se não há a variável da sessão que identifica o usuário
+if (!isset($_SESSION['UsuarioID'])) {
+    // Destrói a sessão por segurança
+    session_destroy();
+} else {
+    header("Location: sistem/index.php");
+}
+
+?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -24,23 +38,23 @@
     <div class="card p-4 shadow" style="width: 100%; max-width: 400px;">
         <div class="card-body">
             <h3 class="text-center mb-4">Login</h3>
-            <form>
+            <form method="POST" action="validacao.php">
                 <div class="mb-3">
                     <label for="email" class="form-label">Email</label>
-                    <input type="email" class="form-control" id="email" placeholder="Digite seu email" required>
+                    <input type="email" class="form-control" name="email" id="email" placeholder="Digite seu usuario" required>
                 </div>
                 <div class="mb-3">
-                    <label for="password" class="form-label">Senha</label>
-                    <input type="password" class="form-control" id="password" placeholder="Digite sua senha" required>
+                    <label for="senha" class="form-label">Senha</label>
+                    <input type="password" class="form-control" name="senha" id="senha" placeholder="Digite sua senha" required>
                 </div>
                 <div class="d-grid">
                     <button type="submit" class="btn btn-primary">Entrar</button>
                 </div>
-                <div class="mt-3 text-center">
+                <!-- <div class="mt-3 text-center">
                     <small>
                         Não tem uma conta? <a href="#">Registre-se</a>
                     </small>
-                </div>
+                </div> -->
             </form>
         </div>
     </div>
