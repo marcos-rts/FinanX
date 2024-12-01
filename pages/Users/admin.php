@@ -21,7 +21,7 @@ include '../../includes/header.php'
                         <p class="card-text text-muted">Gerencie usuários e permissões do sistema.</p>
                         <div class="d-flex justify-content-between">
                             <a href="listar_usuarios.html" class="btn btn-outline-secondary btn-sm">Listar Usuários</a>
-                            <a href="criar_usuario.html" class="btn btn-outline-primary btn-sm">Criar Usuário</a>
+                            <a href="config/new_user.php" class="btn btn-outline-primary btn-sm">Criar Usuário</a>
                         </div>
                     </div>
                 </div>
