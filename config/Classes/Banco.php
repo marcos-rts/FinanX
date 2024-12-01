@@ -1,14 +1,16 @@
 <?php
+require_once(__DIR__ . '/Config.php'); // Ajuste o caminho conforme necessário
 include(__DIR__ . '/../log/log.php'); // Caminho absoluto baseado no diretório atual
 // Definição classe Banco
 // Classe Banco aprimorada com melhorias na lógica de logs
 class Banco
 {
-    private static $DB_nome = 'finanx'; // Nome do banco de dados
-    private static $DB_host = 'localhost'; // Endereço host do banco de dados
-    private static $DB_port = '3306'; // Porta personalizada
-    private static $DB_usuario = 'root'; // Nome de usuário
-    private static $DB_senha = ''; // Senha do usuário
+    // private static $DB_nome = 'finanx'; // Nome do banco de dados
+    // private static $DB_host = 'localhost'; // Endereço host do banco de dados
+    // private static $DB_port = '3306'; // Porta personalizada
+    // private static $DB_usuario = 'root'; // Nome de usuário
+    // private static $DB_senha = ''; // Senha do usuário
+
     private static $cont = null; // Variável estática privada para armazenar a conexão com o banco de dados
     private static $logger; // Criação de uma instância do Logger como estática
 
@@ -33,9 +35,10 @@ class Banco
 
         if (self::$cont === null) {
             try {
-                $parametros = "mysql:host=" . self::$DB_host . ";port=" . self::$DB_port . ";dbname=" . self::$DB_nome;
-                self::$cont = new PDO($parametros, self::$DB_usuario, self::$DB_senha);
-                self::$logger->info('Conexão com o banco estabelecida. ', ['host' => self::$DB_host, 'db' => self::$DB_nome]);
+                $config = Config::load()['database'];
+                $parametros = "mysql:host=" . $config['DB_host'] . ";port=" . $config['DB_port'] . ";dbname=" . $config['DB_nome'];
+                self::$cont = new PDO($parametros, $config['DB_usuario'], $config['DB_senha']);
+                self::$logger->info('Conexão com o banco estabelecida. ', ['host' => $config['DB_host'], 'db' => $config['DB_nome']]);
             } catch (PDOException $exception) {
                 self::$logger->error('Erro ao conectar ao banco.', ['mensagem' => $exception->getMessage()]);
                 die($exception->getMessage());
