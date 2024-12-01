@@ -33,12 +33,18 @@ define('BASE_URL', '/GitHub/FinanX/'); // Substitua '/meu-projeto/' pelo caminho
                         <a class="nav-link" href="<?= BASE_URL ?>index.php">Painel</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="<?= BASE_URL ?>pages/sistema/transacao.php">Transação</a>
+                        <a class="nav-link" href="<?= BASE_URL ?>pages/sistema/transacao.php">Lançamento</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="<?= BASE_URL ?>pages/em_construcao.html">Relatorio</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="<?= BASE_URL ?>pages/em_construcao.html">Dashboard</a>
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Cadastro
+                            Configurações
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                             <a class="dropdown-item" href="<?= BASE_URL ?>pages/cadastro/categoria.php">Categoria</a>
@@ -51,7 +57,7 @@ define('BASE_URL', '/GitHub/FinanX/'); // Substitua '/meu-projeto/' pelo caminho
                     </li>
                 </ul>
                 <form class="form-inline my-2 my-lg-0">
-                    <a class="nav-link disabled" href="#">Desativado</a>
+                    <a class="nav-link disabled" href="#">Login</a>
                 </form>
             </div>
         </nav>
