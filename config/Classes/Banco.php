@@ -1,5 +1,5 @@
 <?php
-include ('../../config/log/log.php');
+include(__DIR__ . '/../log/log.php'); // Caminho absoluto baseado no diretório atual
 // Definição classe Banco
 // Classe Banco aprimorada com melhorias na lógica de logs
 class Banco
