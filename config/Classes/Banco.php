@@ -89,7 +89,7 @@ class Banco
 
         try {
             $conn = self::conectar();
-            $sqlFilePath = '../../config/database/db_completo.sql';
+            $sqlFilePath = __DIR__.'../../database/db_completo.sql';
 
             if (!file_exists($sqlFilePath)) {
                 $mensagem = "Arquivo .sql não encontrado: $sqlFilePath";

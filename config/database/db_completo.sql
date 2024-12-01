@@ -103,7 +103,7 @@ CREATE TABLE sis_transacao (
     ano INT NOT NULL,
     tipo_id INT NOT NULL,
     categoria_subcategoria_id INT NOT NULL,
-    pagamento_conta_id INT NOT NULL,
+    pagamento_conta_id INT,
     usuario_id INT NOT NULL,
     evento_id INT, -- Opcional: Vincular transação a um evento
     status ENUM('Pendente', 'Concluída', 'Cancelada') DEFAULT 'Concluída',
