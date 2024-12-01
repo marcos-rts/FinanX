@@ -1,19 +1,22 @@
 <?php
 
 /**
- * Classe Logger para registrar mensagens em um arquivo de log.
+ * Classe Logger para registrar mensagens no console ou em um arquivo de log.
  */
 class Logger
 {
     private $logFile; // Caminho do arquivo de log.
+    private $environment; // Ambiente (desenvolvimento ou produção).
 
     /**
-     * Construtor para inicializar o Logger com o caminho do arquivo de log.
+     * Construtor para inicializar o Logger com o caminho do arquivo de log e o ambiente.
+     * @param string $environment Ambiente atual ('development' ou 'production').
      * @param string $logFile Caminho do arquivo de log. Padrão: '../log/app.log'.
      */
-    public function __construct($logFile = __DIR__.'../../log/app.log')
+    public function __construct($environment = 'production', $logFile = __DIR__ . '/app.log')
     {
         $this->logFile = $logFile;
+        $this->environment = $environment;
         date_default_timezone_set('America/Sao_Paulo');
     }
 
@@ -34,8 +37,14 @@ class Logger
             $formattedMessage .= " | Contexto: $contextString";
         }
 
-        $formattedMessage .= PHP_EOL;
-        file_put_contents($this->logFile, $formattedMessage, FILE_APPEND);
+        if ($this->environment === 'development') {
+            // Enviar para o console no ambiente de desenvolvimento.
+            echo "<script>console.log(" . json_encode($formattedMessage) . ");</script>";
+        } else {
+            // Salvar em arquivo no ambiente de produção.
+            $formattedMessage .= PHP_EOL;
+            file_put_contents($this->logFile, $formattedMessage, FILE_APPEND);
+        }
     }
 
     public function info($message, array $context = null)
@@ -54,15 +63,16 @@ class Logger
     }
 }
 
-
 # =================== Exemplo de Uso ===================
 
 /*
- * Instancie o Logger (o arquivo padrão será '../log/app.log').
- * Caso precise personalizar o caminho do arquivo, passe como argumento.
+ * Instancie o Logger:
+ * Para desenvolvimento: 'development'
+ * Para produção: 'production'
  */
+$logger = new Logger('development'); // Troque para 'production' conforme necessário.
 
-// $logger = new Logger();
-// $logger->info('Mensagem de informação.');
-// $logger->warning('Mensagem de aviso.');
-// $logger->error('Mensagem de erro.');
+// Exemplos de log:
+$logger->info('Mensagem de informação.');
+$logger->warning('Mensagem de aviso.');
+$logger->error('Mensagem de erro.', ['detalhe' => 'Erro crítico']);

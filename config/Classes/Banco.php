@@ -110,8 +110,7 @@ class Banco
 
             self::$logger->info('Arquivo .sql executado com sucesso.', ['caminho' => $sqlFilePath]);
         } catch (Exception $e) {
-            self::$logger->error('Erro durante a instalação do banco.', [
-                'mensagem' => $e->getMessage()
+            self::$logger->error('Erro durante a instalação do banco.', ['mensagem' => $e->getMessage()
             ]);
         }
     }
