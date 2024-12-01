@@ -1,5 +1,5 @@
 <?php
-include 'includes/header.php'
+include 'includes/header.php';
 ?>
 
 <div class="container">
@@ -7,7 +7,8 @@ include 'includes/header.php'
         <div class="container">
             <h1 class="display-4">Fluid jumbotron</h1>
             <p class="lead">Este é um jumbotron modificado que ocupa todo o espaço horizontal de seu elemento pai.
-            </p>
+            <?php // echo $_SESSION['UsuarioNome'] ?>   
+        </p>
         </div>
     </div>
 </div>

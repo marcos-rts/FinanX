@@ -8,7 +8,7 @@ if (!isset($_SESSION['UsuarioID'])) {
     // Destrói a sessão por segurança
     session_destroy();
 } else {
-    header("Location: sistem/index.php");
+    // header("Location: sistem/index.php");
 }
 
 ?>

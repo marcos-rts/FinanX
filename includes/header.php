@@ -1,6 +1,16 @@
 <?php
 // Define o caminho base do site
 define('BASE_URL', '/GitHub/FinanX/'); // Substitua '/meu-projeto/' pelo caminho correto
+// A sessão precisa ser iniciada em cada página diferente
+if (!isset($_SESSION)) session_start();
+
+// Verifica se não há a variável da sessão que identifica o usuário
+if (!isset($_SESSION['UsuarioID'])) {
+    // Destrói a sessão por segurança
+    session_destroy();
+} else {
+    // header("Location: index.php");
+}
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -57,7 +67,17 @@ define('BASE_URL', '/GitHub/FinanX/'); // Substitua '/meu-projeto/' pelo caminho
                     </li>
                 </ul>
                 <form class="form-inline my-2 my-lg-0">
-                    <a class="nav-link disabled" href="#">Login</a>
+                    <?php
+                    if (empty($_SESSION['UsuarioID'])) {
+                    ?>
+                        <a class="nav-link" href="<?= BASE_URL ?>auth/login.php">Login</a>
+                    <?php
+                    } else {
+                    ?>
+                        <a class="nav-link" href="<?= BASE_URL ?>auth/logout.php">Logout</a>
+                    <?php
+                    }
+                    ?>
                 </form>
             </div>
         </nav>
