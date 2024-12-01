@@ -5,6 +5,7 @@ include '../../../includes/header.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if ($_POST['senha'] == $_POST['confirmarSenha']) {
+        // var_dump($_POST);
         $result = Users::addUser($_POST);
         echo "Usuario adicionado";
     } else {
@@ -22,11 +23,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </div>
 
     <!-- Formulário de Criação de Usuário -->
-    <form class="shadow-sm p-4 rounded border" method="$_POST">
+    <form class="shadow-sm p-4 rounded border" method="post">
         <!-- Nome Completo -->
         <div class="mb-3">
             <label for="nome" class="form-label">Nome Completo</label>
-            <input type="text" class="form-control" id="nome" nane="nome" placeholder="Digite o nome completo" required>
+            <input type="text" class="form-control" id="nome" name="nome" placeholder="Digite o nome completo" required>
         </div>
 
         <!-- Email -->
@@ -59,11 +60,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <label class="form-label">Status</label>
                 <div>
                     <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" id="ativo" name="status" value="true" required>
+                        <input class="form-check-input" type="radio" id="ativo" name="status" value="1" required>
                         <label class="form-check-label" for="ativo">Ativo</label>
                     </div>
                     <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" id="inativo" name="status" value="false">
+                        <input class="form-check-input" type="radio" id="inativo" name="status" value="0">
                         <label class="form-check-label" for="inativo">Inativo</label>
                     </div>
                 </div>

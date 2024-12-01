@@ -1,6 +1,7 @@
 <?php
 require_once(__DIR__ . '/Config.php');
-include(__DIR__ . '/../log/log.php'); // Caminho absoluto baseado no diretório atual
+require_once(__DIR__ . '/Banco.php');
+require_once(__DIR__ . '/../log/log.php'); // Caminho absoluto baseado no diretório atual
 
 
 
@@ -19,8 +20,10 @@ class Users
 
     public static function addUser($informacoes)
     {
+        // $logger = new Logger();
         if (empty($informacoes['nome']) || empty($informacoes['email'])) {
-            return "Informações incompletas.";
+            echo "Informações incompletas.";
+            // $logger->error('Informações incompletas.');
         }
         $nome = trim($informacoes['nome']);
         $email = trim($informacoes['email']);
@@ -28,7 +31,7 @@ class Users
         $tipo = trim($informacoes['tipo']);
         $status = trim($informacoes['status']);
 
-        $sql = "INSERT INTO db_usuario (nome, email, senha_hash, tipo, ativo) VALUES ('$nome', '$email', '$senha', '$tipo', '$status')";
+        $sql = "INSERT INTO bd_usuario (nome, email, senha_hash, tipo, ativo) VALUES ('$nome', '$email', '$senha', '$tipo', '$status')";
         try {
 
             Banco::query($sql);

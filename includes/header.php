@@ -46,10 +46,10 @@ if (!isset($_SESSION['UsuarioID'])) {
                         <a class="nav-link" href="<?= BASE_URL ?>pages/sistema/transacao.php">Lançamento</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="<?= BASE_URL ?>pages/em_construcao.html">Relatorio</a>
+                        <a class="nav-link" href="<?= BASE_URL ?>pages/sistema/relatorio.php">Relatorio</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="<?= BASE_URL ?>pages/em_construcao.html">Dashboard</a>
+                        <a class="nav-link" href="<?= BASE_URL ?>pages/sistema/dashboard.php">Dashboard</a>
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="" id="navbarDropdown" role="button"
@@ -70,6 +70,7 @@ if (!isset($_SESSION['UsuarioID'])) {
                                 <a class="dropdown-item" href="#">Conta</a>
                                 <a class="dropdown-item" href="#">Metodo Pagamento</a>
                                 <a class="dropdown-item" href="#">Eventos</a>
+                                <a class="dropdown-item" href="<?= BASE_URL ?>pages/Users/admin.php">Admin</a>
                                 <?php
                             };
                             ?>
