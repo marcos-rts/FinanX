@@ -1,15 +1,19 @@
 <?php
 include 'includes/header.php';
+include 'config/Classes/Banco.php';
+
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Painel Inicial</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
+
 <body>
     <!-- Container Principal -->
     <div class="container-fluid p-4">
@@ -26,7 +30,14 @@ include 'includes/header.php';
                 <div class="card shadow-sm">
                     <div class="card-body">
                         <h5 class="card-title">Total de Transações</h5>
-                        <p class="h3 text-primary">250</p>
+                        <p class="h3 text-primary">
+                            <!-- 250 -->
+                            <?php
+                            $sql = "select count(*) from sis_transacao";
+                            $resultado = Banco::query($sql);
+                            echo $resultado[0]['count(*)'];
+                            ?>
+                        </p>
                     </div>
                 </div>
             </div>
@@ -35,7 +46,14 @@ include 'includes/header.php';
                 <div class="card shadow-sm">
                     <div class="card-body">
                         <h5 class="card-title">Total de Eventos</h5>
-                        <p class="h3 text-success">12</p>
+                        <p class="h3 text-success">
+                            <!-- 12 -->
+                            <?php
+                            $sql = "select count(*) from bd_eventos";
+                            $resultado = Banco::query($sql);
+                            echo $resultado[0]['count(*)'];
+                            ?>
+                        </p>
                     </div>
                 </div>
             </div>
@@ -44,7 +62,14 @@ include 'includes/header.php';
                 <div class="card shadow-sm">
                     <div class="card-body">
                         <h5 class="card-title">Tipos de Pagamento</h5>
-                        <p class="h3 text-warning">6</p>
+                        <p class="h3 text-warning">
+                            <!-- 6 -->
+                            <?php
+                            $sql = "select count(*) from bd_tipo_pagamento";
+                            $resultado = Banco::query($sql);
+                            echo $resultado[0]['count(*)'];
+                            ?>
+                        </p>
                     </div>
                 </div>
             </div>
@@ -53,7 +78,14 @@ include 'includes/header.php';
                 <div class="card shadow-sm">
                     <div class="card-body">
                         <h5 class="card-title">Notificações</h5>
-                        <p class="h3 text-danger">3</p>
+                        <p class="h3 text-danger">
+                            <!-- 3 -->
+                            <?php
+                            $sql = "select count(*) from bd_notificacoes";
+                            $resultado = Banco::query($sql);
+                            echo $resultado[0]['count(*)'];
+                            ?>
+                        </p>
                     </div>
                 </div>
             </div>
@@ -79,6 +111,9 @@ include 'includes/header.php';
             <div class="col-md-4">
                 <div class="card shadow-sm">
                     <div class="card-header">
+                        <!-- TO DO
+                            - Vincular com o telegram para adicionar novas notificações e receber lembretes (tipo um plugin de telegram) 
+                        -->
                         <h5 class="mb-0">Lembretes</h5>
                     </div>
                     <div class="card-body">
@@ -114,6 +149,9 @@ include 'includes/header.php';
             <div class="col-md-4 mb-4">
                 <div class="card shadow-sm">
                     <div class="card-header">
+                        <!-- TO DO
+                            - Vincular com o telegram para monitorar o status do sistema (tipo um plugin de telegram)
+                        -->
                         <h5 class="mb-0">Status do Sistema</h5>
                     </div>
                     <div class="card-body">
@@ -136,6 +174,7 @@ include 'includes/header.php';
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
+
 </html>
 
 <?php
