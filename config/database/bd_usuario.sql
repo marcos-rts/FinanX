@@ -8,17 +8,16 @@ CREATE TABLE
         tipo ENUM ('Admin', 'Comum') DEFAULT 'Comum',
         ativo BOOLEAN DEFAULT TRUE,
         -- Bloco padrão 
-        criado_em TIMESTAMP, -- Data da Criação
+        criado_em TIMESTAMP DEFAULT CURRENT_TIMESTAMP, -- Data da Criação
         criado_por INT, -- Usuario que criou
-        editado_em TIMESTAMP, -- Data da edição
+        editado_em TIMESTAMP NULL DEFAULT NULL, -- Data da edição
         editado_por INT, -- Usuario que editou
-        excluido_em TIMESTAMP, -- Data da exclusão
+        excluido_em TIMESTAMP NULL DEFAULT NULL, -- Data da exclusão
         excluido_por INT, -- Usuario que excluiu
-        ativado_em TIMESTAMP, -- Data da ativação
+        ativado_em TIMESTAMP NULL DEFAULT NULL, -- Data da ativação
         ativado_por INT, -- Usuario que ativou
-        inativado_em TIMESTAMP, -- Data da inativação
+        inativado_em TIMESTAMP NULL DEFAULT NULL, -- Data da inativação
         inativado_por INT, -- Usuario que inativou
-        ativo BOOLEAN DEFAULT 1 -- Status do registro
         excluido BOOLEAN DEFAULT 1 -- Status do registro
     );
 

@@ -1,6 +1,16 @@
 <?php
 // Define o caminho base do site
 define('BASE_URL', '/GitHub/FinanX/'); // Substitua '/meu-projeto/' pelo caminho correto
+// A sessão precisa ser iniciada em cada página diferente
+if (!isset($_SESSION)) session_start();
+
+// Verifica se não há a variável da sessão que identifica o usuário
+if (!isset($_SESSION['UsuarioID'])) {
+    // Destrói a sessão por segurança
+    session_destroy();
+} else {
+    // header("Location: index.php");
+}
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -33,25 +43,55 @@ define('BASE_URL', '/GitHub/FinanX/'); // Substitua '/meu-projeto/' pelo caminho
                         <a class="nav-link" href="<?= BASE_URL ?>index.php">Painel</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="<?= BASE_URL ?>pages/sistema/transacao.php">Transação</a>
+                        <a class="nav-link" href="<?= BASE_URL ?>pages/sistema/transacao.php">Lançamento</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="<?= BASE_URL ?>pages/sistema/relatorio.php">Relatorio</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="<?= BASE_URL ?>pages/sistema/dashboard.php">Dashboard</a>
                     </li>
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                        <a class="nav-link dropdown-toggle" href="" id="navbarDropdown" role="button"
                             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Cadastro
+                            Configurações
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="<?= BASE_URL ?>pages/cadastro/categoria.php">Categoria</a>
-                            <a class="dropdown-item" href="<?= BASE_URL ?>pages/cadastro/subcategoria.php">Subcategoria</a>
+                            <a class="dropdown-item" href="<?= BASE_URL ?>pages/Configuracoes/listagem_categorias.php">Categoria</a>
+                            <a class="dropdown-item" href="<?= BASE_URL ?>pages/Configuracoes/listagem_subcategoria.php">Subcategoria</a>
                             <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="#">Algo mais aqui</a>
+                            <?php
+                            if (empty($_SESSION['UsuarioID'])){
+                                ?>
+                                <a class="dropdown-item disabled" href="#">Configurações</a>
+                                <?php
+                            }else{
+                                ?>
+                                <a class="dropdown-item" href="<?= BASE_URL ?>pages/Configuracoes/cadastros/conta.php">Conta</a>
+                                <a class="dropdown-item" href="#">Metodo Pagamento</a>
+                                <a class="dropdown-item" href="#">Eventos</a>
+                                <a class="dropdown-item" href="<?= BASE_URL ?>pages/Users/admin.php">Admin</a>
+                                <?php
+                            };
+                            ?>
+                            <!-- <a class="dropdown-item" href="#">Algo mais aqui</a> -->
                         </div>
                     </li>
                     <li class="nav-item">
                     </li>
                 </ul>
                 <form class="form-inline my-2 my-lg-0">
-                    <a class="nav-link disabled" href="#">Desativado</a>
+                    <?php
+                    if (empty($_SESSION['UsuarioID'])) {
+                    ?>
+                        <a class="nav-link" href="<?= BASE_URL ?>auth/login.php">Login</a>
+                    <?php
+                    } else {
+                    ?>
+                        <a class="nav-link" href="<?= BASE_URL ?>auth/logout.php">Logout</a>
+                    <?php
+                    }
+                    ?>
                 </form>
             </div>
         </nav>
