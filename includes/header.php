@@ -67,7 +67,7 @@ if (!isset($_SESSION['UsuarioID'])) {
                                 <?php
                             }else{
                                 ?>
-                                <a class="dropdown-item" href="#">Conta</a>
+                                <a class="dropdown-item" href="<?= BASE_URL ?>pages/Configuracoes/cadastros/conta.php">Conta</a>
                                 <a class="dropdown-item" href="#">Metodo Pagamento</a>
                                 <a class="dropdown-item" href="#">Eventos</a>
                                 <a class="dropdown-item" href="<?= BASE_URL ?>pages/Users/admin.php">Admin</a>
