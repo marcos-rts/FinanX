@@ -46,13 +46,13 @@ if (!isset($_SESSION['UsuarioID'])) {
                         <a class="nav-link" href="<?= BASE_URL ?>pages/sistema/transacao.php">Lançamento</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="<?= BASE_URL ?>pages/sistema/relatorio.php">Relatorio</a>
+                        <a class="nav-link" href="<?= BASE_URL ?>pages/sistema/relatorio.php">Relatório</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="<?= BASE_URL ?>pages/sistema/dashboard.php">Dashboard</a>
                     </li>
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="" id="navbarDropdown" role="button"
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             Configurações
                         </a>
@@ -60,39 +60,29 @@ if (!isset($_SESSION['UsuarioID'])) {
                             <a class="dropdown-item" href="<?= BASE_URL ?>pages/Configuracoes/listagem_categorias.php">Categoria</a>
                             <a class="dropdown-item" href="<?= BASE_URL ?>pages/Configuracoes/listagem_subcategoria.php">Subcategoria</a>
                             <div class="dropdown-divider"></div>
-                            <?php
-                            if (empty($_SESSION['UsuarioID'])){
-                                ?>
+                            <?php if (empty($_SESSION['UsuarioID'])) { ?>
                                 <a class="dropdown-item disabled" href="#">Configurações</a>
-                                <?php
-                            }else{
-                                ?>
+                            <?php } else { ?>
                                 <a class="dropdown-item" href="<?= BASE_URL ?>pages/Configuracoes/cadastros/conta.php">Conta</a>
-                                <a class="dropdown-item" href="#">Metodo Pagamento</a>
+                                <a class="dropdown-item" href="#">Método Pagamento</a>
                                 <a class="dropdown-item" href="#">Eventos</a>
                                 <a class="dropdown-item" href="<?= BASE_URL ?>pages/Users/admin.php">Admin</a>
-                                <?php
-                            };
-                            ?>
-                            <!-- <a class="dropdown-item" href="#">Algo mais aqui</a> -->
+                            <?php } ?>
                         </div>
                     </li>
-                    <li class="nav-item">
-                    </li>
                 </ul>
-                <form class="form-inline my-2 my-lg-0">
-                    <?php
-                    if (empty($_SESSION['UsuarioID'])) {
-                    ?>
-                        <a class="nav-link" href="<?= BASE_URL ?>auth/login.php">Login</a>
-                    <?php
-                    } else {
-                    ?>
-                        <a class="nav-link" href="<?= BASE_URL ?>auth/logout.php">Logout</a>
-                    <?php
-                    }
-                    ?>
-                </form>
+                <ul class="navbar-nav ml-auto">
+                    <?php if (empty($_SESSION['UsuarioID'])) { ?>
+                        <li class="nav-item">
+                            <a class="nav-link" href="<?= BASE_URL ?>auth/login.php">Login</a>
+                        </li>
+                    <?php } else { ?>
+                        <li class="nav-item">
+                            <a class="nav-link" href="<?= BASE_URL ?>auth/logout.php">Logout</a>
+                        </li>
+                    <?php } ?>
+                </ul>
             </div>
+
         </nav>
     </header>
