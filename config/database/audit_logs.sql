@@ -7,6 +7,5 @@ CREATE TABLE
         acao ENUM ('Criado', 'Alterado', 'Excluído') NOT NULL,
         usuario_id INT NOT NULL,
         timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-        detalhes TEXT,
-        FOREIGN KEY (usuario_id) REFERENCES bd_usuario (id)
+        detalhes TEXT
     );

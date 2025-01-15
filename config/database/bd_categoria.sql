@@ -1,9 +1,7 @@
--- Tabela de Subcategorias
+-- Tabela de Categorias
 CREATE TABLE
-    bd_subcategoria (
+    bd_categoria (
         id INT AUTO_INCREMENT PRIMARY KEY,
-        categoria_id INT NOT NULL, -- Chave estrangeira para Categoria
         nome VARCHAR(100) NOT NULL,
         descricao TEXT
-
     );

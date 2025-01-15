@@ -5,20 +5,7 @@ CREATE TABLE
         nome VARCHAR(100) NOT NULL,
         email VARCHAR(150) UNIQUE NOT NULL,
         senha_hash VARCHAR(255) NOT NULL,
-        tipo ENUM ('Admin', 'Comum') DEFAULT 'Comum',
-        ativo BOOLEAN DEFAULT TRUE,
-        -- Bloco padrão 
-        criado_em TIMESTAMP DEFAULT CURRENT_TIMESTAMP, -- Data da Criação
-        criado_por INT, -- Usuario que criou
-        editado_em TIMESTAMP NULL DEFAULT NULL, -- Data da edição
-        editado_por INT, -- Usuario que editou
-        excluido_em TIMESTAMP NULL DEFAULT NULL, -- Data da exclusão
-        excluido_por INT, -- Usuario que excluiu
-        ativado_em TIMESTAMP NULL DEFAULT NULL, -- Data da ativação
-        ativado_por INT, -- Usuario que ativou
-        inativado_em TIMESTAMP NULL DEFAULT NULL, -- Data da inativação
-        inativado_por INT, -- Usuario que inativou
-        excluido BOOLEAN DEFAULT 1 -- Status do registro
+        tipo ENUM ('Admin', 'Comum') DEFAULT 'Comum'
     );
 
 -- Inserir usuário admin geral
