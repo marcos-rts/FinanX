@@ -21,6 +21,19 @@ CREATE TABLE
         excluido BOOLEAN DEFAULT 1 -- Status do registro
     );
 
+-- Inserir usuário admin geral
+INSERT INTO
+    bd_usuario (nome, email, senha_hash, tipo, ativo, criado_por)
+VALUES
+    (
+        'Admin Geral',
+        'admin@exemplo.com',
+        SHA2 ('senha_admin_segura', 256),
+        'Admin',
+        TRUE,
+        1
+    );
+
 -- Tabela de Configurações dos Usuários
 -- CREATE TABLE bd_usuario_config (
 --     id INT AUTO_INCREMENT PRIMARY KEY,

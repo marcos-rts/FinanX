@@ -1,6 +1,4 @@
 -- Tabela de Transações
-
-
 CREATE TABLE
     sis_transacao (
         id INT AUTO_INCREMENT PRIMARY KEY,
@@ -13,6 +11,7 @@ CREATE TABLE
         usuario_id INT NOT NULL,
         evento_id INT, -- Opcional: Vincular transação a um evento
         status ENUM ('Pendente', 'Concluída', 'Cancelada') DEFAULT 'Concluída',
+        data_transferencia TIMESTAMP DEFAULT CURRENT_TIMESTAMP, -- Data da transferência
         FOREIGN KEY (tipo_id) REFERENCES bd_tipo (id),
         FOREIGN KEY (categoria_subcategoria_id) REFERENCES rlc_categoria_subcategoria (id),
         FOREIGN KEY (pagamento_conta_id) REFERENCES rlc_pagamento_conta (id),
@@ -32,4 +31,3 @@ CREATE TABLE
         ativo BOOLEAN DEFAULT 1, -- Status do registro
         excluido BOOLEAN DEFAULT 1 -- Status do registro
     );
-
