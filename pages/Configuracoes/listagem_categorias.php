@@ -38,7 +38,7 @@ include '../../includes/header.php'
                     echo "<td> {$categoria['id']} </td>";
                     echo "<td> {$categoria['nome']} </td>";
                     echo "<td> {$categoria['descricao']}</td>";
-                    echo "<td><a href='edicao/editar_categoria.php?id={$categoria['id']}' class='btn btn-warning btn-sm'>Editar</a><button class='btn btn-danger btn-sm'>Excluir</button></td>";
+                    echo "<td><a href='update/categoria.php?id={$categoria['id']}' class='btn btn-warning btn-sm'>Editar</a><button class='btn btn-danger btn-sm'>Excluir</button></td>";
                 }
             }
             ?>
