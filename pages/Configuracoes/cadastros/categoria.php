@@ -12,9 +12,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Verifica se o campo 'categoria' está presente
     if (!empty($_POST['categoria'])) {
         $categoria = trim($_POST['categoria']);
+        $descricao = trim($_POST['descricao']);
 
         // Prepara a query para inserir no banco de dados
-        $sql = "INSERT INTO categoria (nome) VALUES ('$categoria')";
+        $sql = "INSERT INTO bd_categoria (nome, descricao) VALUES ('$categoria', '$descricao')";
 
         try {
             // Executa a query
@@ -44,7 +45,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <textarea id="descricao" name="descricao" class="form-control"></textarea>
             </div>
             <button type="submit" class="btn btn-primary">Salvar</button>
-            <a href="listagem_categorias.html" class="btn btn-secondary">Voltar</a>
+            <a href="../listagem_categorias.php" class="btn btn-secondary">Voltar</a>
         </form>
     </div>
 </body>
