@@ -9,7 +9,7 @@ ALTER TABLE rlc_pagamento_conta FOREIGN KEY (conta_id) REFERENCES bd_conta (id),
 FOREIGN KEY (tipo_pagamento_id) REFERENCES bd_tipo_pagamento (id),
 FOREIGN KEY (usuario_id) REFERENCES bd_usuario (id);
 
-ALTER TABLE rlc_usuario_grupo FOREIGN KEY (usuario_id) REFERENCES bd_usuarios (id),
+ALTER TABLE rlc_usuario_grupo FOREIGN KEY (usuario_id) REFERENCES bd_usuario (id),
 FOREIGN KEY (grupo_id) REFERENCES bd_grupo (id);
 
 ALTER TABLE sis_transacao FOREIGN KEY (tipo_id) REFERENCES bd_tipo (id),

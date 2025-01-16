@@ -4,3 +4,4 @@ CREATE TABLE
         nome VARCHAR(100) NOT NULL, -- Nome do grupo
         descricao TEXT, -- Descrição detalhada do grupo
         tipo ENUM ('Usuários', 'Permissões', 'Categorias', 'Outros') NOT NULL -- Tipo de grupo
+    );

@@ -142,41 +142,48 @@ CREATE TABLE
     );
 
 -- RELACIONAMENTOS
-ALTER TABLE audit_logs ADD FOREIGN KEY (usuario_id) REFERENCES bd_usuario (id);
+ALTER TABLE audit_logs 
+    ADD FOREIGN KEY (usuario_id) REFERENCES bd_usuario (id);
 
-ALTER TABLE audit_notificacoes ADD FOREIGN KEY (transacao_id) REFERENCES sis_transacao (id);
+ALTER TABLE audit_notificacoes 
+    ADD FOREIGN KEY (transacao_id) REFERENCES sis_transacao (id);
 
-ALTER TABLE bd_subcategoria ADD FOREIGN KEY (categoria_id) REFERENCES bd_categoria (id);
+ALTER TABLE bd_subcategoria 
+    ADD FOREIGN KEY (categoria_id) REFERENCES bd_categoria (id);
 
-ALTER TABLE rlc_pagamento_conta ADD FOREIGN KEY (conta_id) REFERENCES bd_conta (id),
-ADD FOREIGN KEY (tipo_pagamento_id) REFERENCES bd_tipo_pagamento (id),
-ADD FOREIGN KEY (usuario_id) REFERENCES bd_usuario (id);
+ALTER TABLE rlc_pagamento_conta 
+    ADD FOREIGN KEY (conta_id) REFERENCES bd_conta (id),
+    ADD FOREIGN KEY (tipo_pagamento_id) REFERENCES bd_tipo_pagamento (id),
+    ADD FOREIGN KEY (usuario_id) REFERENCES bd_usuario (id);
 
-ALTER TABLE rlc_usuario_grupo ADD FOREIGN KEY (usuario_id) REFERENCES bd_usuarios (id),
-ADD FOREIGN KEY (grupo_id) REFERENCES bd_grupo (id);
+ALTER TABLE rlc_usuario_grupo 
+    ADD FOREIGN KEY (usuario_id) REFERENCES bd_usuario (id),
+    ADD FOREIGN KEY (grupo_id) REFERENCES bd_grupo (id);
 
-ALTER TABLE sis_transacao ADD FOREIGN KEY (tipo_id) REFERENCES bd_tipo (id),
-ADD FOREIGN KEY (subcategoria_id) REFERENCES bd_subcategoria (id),
-ADD FOREIGN KEY (pagamento_conta_id) REFERENCES rlc_pagamento_conta (id),
-ADD FOREIGN KEY (usuario_id) REFERENCES bd_usuario (id),
-ADD FOREIGN KEY (evento_id) REFERENCES bd_eventos (id),
-ADD FOREIGN KEY (conta_id) REFERENCES bd_conta (id);
+ALTER TABLE sis_transacao 
+    ADD FOREIGN KEY (tipo_id) REFERENCES bd_tipo (id),
+    ADD FOREIGN KEY (subcategoria_id) REFERENCES bd_subcategoria (id),
+    ADD FOREIGN KEY (pagamento_conta_id) REFERENCES rlc_pagamento_conta (id),
+    ADD FOREIGN KEY (usuario_id) REFERENCES bd_usuario (id),
+    ADD FOREIGN KEY (evento_id) REFERENCES bd_eventos (id),
+    ADD FOREIGN KEY (conta_id) REFERENCES bd_conta (id);
 
-ALTER TABLE sis_transferencia ADD FOREIGN KEY (conta_origem_id) REFERENCES bd_conta (id), -- Chave estrangeira para Conta de Origem
-ADD FOREIGN KEY (conta_destino_id) REFERENCES bd_conta (id), -- Chave estrangeira para Conta de Destino
-ADD FOREIGN KEY (evento_id) REFERENCES bd_eventos (id), -- Chave estrangeira para Eventos
-ADD FOREIGN KEY (subcategoria_id) REFERENCES bd_subcategoria (id);
+ALTER TABLE sis_transferencia 
+    ADD FOREIGN KEY (conta_origem_id) REFERENCES bd_conta (id), -- Chave estrangeira para Conta de Origem
+    ADD FOREIGN KEY (conta_destino_id) REFERENCES bd_conta (id), -- Chave estrangeira para Conta de Destino
+    ADD FOREIGN KEY (evento_id) REFERENCES bd_eventos (id), -- Chave estrangeira para Eventos
+    ADD FOREIGN KEY (subcategoria_id) REFERENCES bd_subcategoria (id);
 
 -- Chave estrangeira para Subcategorias
 -- Inserir usuário admin geral
 INSERT INTO
-    bd_usuario (nome, email, senha_hash, tipo, ativo, criado_por)
+    bd_usuario (nome, email, senha_hash, tipo)
 VALUES
     (
         'Admin Geral',
         'admin@exemplo.com',
         SHA2 ('senha_admin_segura', 256),
-        'Admin',
-        TRUE,
-        1
+        'Admin'
+        -- TRUE,
+        -- 1
     );
