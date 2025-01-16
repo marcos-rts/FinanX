@@ -22,7 +22,7 @@ if (!isset($_SESSION['UsuarioID'])) {
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
         body {
-            background-image: url("../assets/img/background.png"); /* Substitua pela URL da sua imagem */
+            background-image: url("../assets/img/FINANX.png"); /* Substitua pela URL da sua imagem */
             background-size: cover; /* Faz a imagem cobrir toda a tela */
             background-position: center; /* Centraliza a imagem */
             background-repeat: no-repeat; /* Evita repetição da imagem */

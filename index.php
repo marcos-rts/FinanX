@@ -69,7 +69,7 @@ include 'config/Classes/Banco.php';
                     <p class="h3 text-danger">
                         <!-- 3 -->
                         <?php
-                        $sql = "select count(*) from bd_notificacoes";
+                        $sql = "select count(*) from audit_notificacoes";
                         $resultado = Banco::query($sql);
                         echo $resultado[0]['count(*)'];
                         ?>
