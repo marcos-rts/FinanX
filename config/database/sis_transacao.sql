@@ -1,11 +1,14 @@
-CREATE TABLE Transacao ( 
-    id INT PRIMARY KEY AUTO_INCREMENT, 
-    -- descricao VARCHAR(255), 
-    valor DECIMAL(10, 2) NOT NULL, 
-    -- data DATE NOT NULL, 
-    tipo ENUM('Despesa', 'Receita') NOT NULL, 
-    -- mes INT NOT NULL, -- Mês da transação (1 a 12) 
-    ano INT NOT NULL, -- Ano da transação 
-    subcategoria_id INT, FOREIGN KEY (subcategoria_id) REFERENCES Subcategoria(id) ,
-    mes_id INT, FOREIGN KEY (mes_id) REFERENCES Mes(id)
-);
+-- Tabela de Transações
+CREATE TABLE
+    sis_transacao (
+        id INT AUTO_INCREMENT PRIMARY KEY,
+        valor DECIMAL(10, 2) NOT NULL,
+        tipo_id INT NOT NULL,
+        subcategoria_id INT NOT NULL,
+        pagamento_conta_id INT NOT NULL,
+        conta_id INT,
+        usuario_id INT NOT NULL,
+        evento_id INT, -- Opcional: Vincular transação a um evento
+        status ENUM ('Pendente', 'Concluída', 'Cancelada') DEFAULT 'Concluída',
+        data_transferencia TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    );
